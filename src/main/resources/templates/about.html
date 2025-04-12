@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}">
+<head>
+    <style>
+        /* Custom styles for the About page */
+        .team-member-card {
+            transition: all 0.3s ease;
+        }
+        .team-member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .social-icon {
+            color: #6DB33F; /* Custom color for social icons */
+            transition: color 0.3s ease;
+        }
+        .social-icon:hover {
+            color: #4a8c2c; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content" class="container my-5 grid-span">
+    <!-- Introduction Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">About Spring Music</h1>
+        <p class="lead text-muted">Your gateway to discovering and enjoying the best music from around the world.</p>
+    </div>
+
+    <!-- Mission Section -->
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h2 class="h3 mb-4">Our Mission</h2>
+            <p class="text-muted">
+                At My Music App, we believe that music is a universal language that brings people together. Our mission is to provide a seamless and enjoyable music streaming experience, connecting artists with their fans and helping listeners discover new favorites.
+            </p>
+        </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h2 class="h3 mb-4">Meet the Team</h2>
+            <p class="text-muted mb-4">
+                We are a passionate group of music lovers, developers, and designers dedicated to creating the best music streaming platform.
+            </p>
+            <div class="row justify-content-center">
+                <!-- Team Member 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-sm team-member-card">
+                        <img src="/assets/images/avatar.webp" class="card-img-top rounded-circle mx-auto mt-4" alt="Team Member 1" style="width: 100px; height: 100px;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">John Doe</h5>
+                            <p class="card-text text-muted">CEO & Founder</p>
+                            <div class="d-flex justify-content-center gap-3">
+                                <a href="#" class="text-decoration-none social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-decoration-none social-icon"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="text-decoration-none social-icon"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-sm team-member-card">
+                        <img src="/assets/images/avatar.webp" class="card-img-top rounded-circle mx-auto mt-4" alt="Team Member 2" style="width: 100px; height: 100px;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Jane Smith</h5>
+                            <p class="card-text text-muted">Lead Developer</p>
+                            <div class="d-flex justify-content-center gap-3">
+                                <a href="#" class="text-decoration-none social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-decoration-none social-icon"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="text-decoration-none social-icon"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-sm team-member-card">
+                        <img src="/assets/images/avatar.webp" class="card-img-top rounded-circle mx-auto mt-4" alt="Team Member 3" style="width: 100px; height: 100px;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Alice Johnson</h5>
+                            <p class="card-text text-muted">UI/UX Designer</p>
+                            <div class="d-flex justify-content-center gap-3">
+                                <a href="#" class="text-decoration-none social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-decoration-none social-icon"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="text-decoration-none social-icon"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h2 class="h3 mb-4">Get in Touch</h2>
+            <p class="text-muted mb-4">
+                Have questions or feedback? We'd love to hear from you! Reach out to us via email or connect with us on social media.
+            </p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="mailto:support@mymusicapp.com" class="btn btn-info btn-lg"><i class="fas fa-envelope me-2"></i>Email Us</a>
+                <a href="#" class="btn btn-outline-info btn-lg"><i class="fab fa-twitter me-2"></i>Twitter</a>
+            </div>
+        </div>
+    </div>
+    <hr class="mt-5">
+    <footer th:replace="~{fragments/content-footer}"></footer>
+</section>
+</body>
+</html>

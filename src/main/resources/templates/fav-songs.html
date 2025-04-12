@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<body>
+<section layout:fragment="content" class="grid-span">
+
+    <div th:if="${deleteMessage}">
+        <div th:replace="~{fragments/toast :: toast('success', ${deleteMessage})}"></div>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-start mt-3 px-5">
+        <h3 class="h3">Favorite Songs <span th:text="'(' + ${songs.size()} + ')'"></span></h3>
+    </div>
+
+    <div class="px-5 mt-2">
+        <table class="table table-hover table-borderless border-top">
+            <thead>
+            <tr>
+                <th scope="col" style="width: 50px;">#</th>
+                <th scope="col">Title</th>
+                <th scope="col" class="text-end"><i class="fa-regular fa-clock"></i></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="song, iterStat : ${songs}" class="song-row align-middle">
+                <th scope="row">
+                    <span class="row-number" th:text="${iterStat.count}">1</span>
+                    <div th:attr="onclick=|playSong({
+                        audioUrl: '${song.audioUrl}',
+                        title: '${song.title}',
+                        artistNickname: '${song.artist.nickname}',
+                        coverUrl: '${song.cover.url}'
+                    })|"
+                         class="play-button">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                </th>
+                <td class="d-flex align-items-center">
+                    <img th:src="${song.cover.url ?: '/assets/images/album-cover.webp'}"
+                         alt="Cover"
+                         class="me-3 rounded-3"
+                         style="object-fit: cover; width: 50px; height: 50px;">
+
+                    <div class="d-flex flex-column">
+                        <h6
+                                class="link-light link-underline-opacity-0 link-underline-opacity-75-hover"
+                                style="width: fit-content;"
+                                th:text="${song.title}">
+                            Sample Song
+                        </h6>
+
+                        <a th:href="@{/artists/{id}(id=${song.artist.id})}"
+                           class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover text-body-tertiary"
+                           style="width: fit-content; font-size: 14px;"
+                           th:text="${song.artist.nickname}">
+                            Singer
+                        </a>
+                    </div>
+                </td>
+                <td class="text-end">
+                    <!-- Delete Button (Admin Only) -->
+                    <form th:action="@{/songs/delete/{id}(id=${song.id})}"
+                          method="post"
+                          class="delete-btn"
+                          sec:authorize="hasRole('ADMIN')"
+                          onsubmit="return confirm('Are you sure you want to delete this song?')">
+                        <button type="submit" class="btn btn-link p-0 border-0 bg-transparent me-3" title="Delete song">
+                            <i class="fa-solid fa-trash text-danger"></i>
+                        </button>
+                    </form>
+
+                    <!-- Favorite Button -->
+                    <form th:action="@{/songs/add-fav/{id}(id=${song.id})}" method="post" sec:authorize="isAuthenticated()" class="heart-btn">
+                        <button type="submit" class="btn btn-link p-0 border-0 bg-transparent me-3 text-body" title="Toggle favorite">
+                            <i class="fa-solid fa-heart" th:classappend="${song.isFavorite} ? ' text-rose' : ''"></i>
+                        </button>
+                    </form>
+
+
+                    <!-- Duration -->
+                    <span th:text="${song.duration}">3:45</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr class="mt-5">
+    <footer th:replace="~{fragments/content-footer}"></footer>
+</section>
+</body>
+</html>

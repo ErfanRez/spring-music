@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<body>
+<section layout:fragment="content" class="grid-span mt-3">
+    <!-- Toast fragment -->
+    <div th:if="${success}">
+        <div th:replace="~{fragments/toast :: toast('success', ${success})}"></div>
+    </div>
+
+    <div th:if="${deleteMessage}">
+        <div th:replace="~{fragments/toast :: toast('success', ${deleteMessage})}"></div>
+    </div>
+
+
+    <div class="d-flex align-items-center justify-content-between mt-3 px-5" sec:authorize="hasAnyRole('ADMIN')">
+        <div>
+            <h2>Welcome <span sec:authentication="name">Admin</span></h2>
+        </div>
+        <a class="btn btn-outline-light btn-lg mb-3" href="/dashboard/new-artist"><span><i class="fa-solid fa-plus"></i></span> Artist</a>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between mt-3 px-5" sec:authorize="hasRole('ARTIST')">
+        <div class="d-flex align-items-center">
+            <img th:src="${currentUser.profilePic.url ?: '/assets/images/singer.webp'}" alt="Artist" class="cover-container object-fit-cover rounded-circle me-4" width="250" height="250">
+            <div class="d-flex flex-column">
+                <h3 th:text="${currentUser.fullName}">Artist Name</h3>
+                <h4 class="text-secondary-emphasis" th:text="${currentUser.nickname}">Nickname</h4>
+            </div>
+        </div>
+        <div class="d-flex flex-column">
+            <a class="btn btn-outline-light btn-lg mb-3" href="/dashboard/new-track"><span><i class="fa-solid fa-plus"></i></span> Track</a>
+            <a class="btn btn-outline-light btn-lg" href="/dashboard/new-album"><span><i class="fa-solid fa-plus"></i></span> Album</a>
+        </div>
+    </div>
+
+<!--    ARTIST content-->
+    <div sec:authorize="hasRole('ARTIST')">
+        <!-- Songs-->
+        <div class="d-flex align-items-center justify-content-start mt-5 px-5">
+            <h3 class="h3">My Single Tracks <span th:text="'(' + ${tracks.size()} + ')'">(3)</span></h3>
+        </div>
+
+        <!-- Scrollable Container with Arrows -->
+        <div class="pagination-container d-flex align-items-center">
+            <!-- Left Arrow -->
+            <button class="btn z-1 arrow-left bg-transparent" onclick="scrollContainerLeft('songs')">
+                <i class="fa-solid fa-chevron-left fs-2"></i>
+            </button>
+
+            <!-- Songs Cards Container -->
+            <div id="songs" class="d-flex flex-nowrap gap-3 overflow-x-auto scrollable-container py-2">
+                <div th:each="song : ${tracks}">
+                    <div th:replace="~{fragments/dash-song-card :: dash-song-card(song=${song})}"></div>
+                </div>
+            </div>
+
+            <!-- Right Arrow -->
+            <button class="btn z-1 arrow-right bg-transparent" onclick="scrollContainerRight('songs')">
+                <i class="fa-solid fa-chevron-right fs-2"></i>
+            </button>
+        </div>
+        <!--    end of songs-->
+
+
+        <!-- Albums-->
+        <div class="d-flex align-items-center justify-content-start mt-3 px-5">
+            <h3 class="h3">My Albums <span th:text="'(' + ${albums.size()} + ')'">(15)</span></h3>
+        </div>
+
+        <!-- Scrollable Container with Arrows -->
+        <div class="pagination-container d-flex align-items-center">
+            <!-- Left Arrow -->
+            <button class="btn z-1 arrow-left bg-transparent" onclick="scrollContainerLeft('albums')">
+                <i class="fa-solid fa-chevron-left fs-2"></i>
+            </button>
+
+            <!-- Album Cards Container -->
+            <div id="albums" class="d-flex flex-nowrap gap-3 overflow-x-auto scrollable-container py-2">
+                <div th:each="album : ${albums}">
+                    <div th:replace="~{fragments/dash-album-card :: dash-album-card(album=${album})}"></div>
+                </div>
+            </div>
+
+            <!-- Right Arrow -->
+            <button class="btn z-1 arrow-right bg-transparent" onclick="scrollContainerRight('albums')">
+                <i class="fa-solid fa-chevron-right fs-2"></i>
+            </button>
+        </div>
+        <!--    end of albums-->
+    </div>
+
+    <hr class="mt-5">
+    <footer th:replace="~{fragments/content-footer}"></footer>
+</section>
+</body>
+</html>

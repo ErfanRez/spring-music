@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}">
+<body>
+<section layout:fragment="content" class="grid-span">
+    <div class="mt-3 px-5">
+
+        <h1 class="mb-5 text-center">Add New Track</h1>
+
+        <div class="text-danger mb-5" th:if="${error}" th:text="${error}"></div>
+
+        <form th:object="${track}" method="post" enctype="multipart/form-data" onsubmit="disableSubmitButton()">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="title" class="form-label">Track Title</label>
+                    <input type="text" class="form-control" id="title" th:field="*{title}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                </div>
+                <div class="col-md-6">
+                    <label for="genre" class="form-label">Genre</label>
+                    <select class="form-select" id="genre" th:field="*{genre}">
+                        <option value="">Select a genre</option>
+                        <option th:each="genre : ${T(com.music.utils.Genres).values()}"
+                                th:value="${genre}"
+                                th:text="${genre.displayName}">
+                        </option>
+                    </select>
+                    <div class="text-danger" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="audioFile" class="form-label">Audio File</label>
+                    <input type="file" class="form-control" id="audioFile" name="audioFile" accept="audio/*">
+                    <div class="text-danger" th:if="${audioError}" th:text="${audioError}"></div>
+                </div>
+                <div class="col-md-6">
+                    <label for="cover" class="form-label">Cover Picture</label>
+                    <input type="file" class="form-control" id="cover" name="cover" accept="image/*">
+                    <div class="text-danger" th:if="${coverError}" th:text="${coverError}"></div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="submit" id="submitButton" class="btn btn-success">Save Track</button>
+            </div>
+        </form>
+    </div>
+    <hr class="mt-5">
+    <footer th:replace="~{fragments/content-footer}"></footer>
+</section>
+</body>
+</html>

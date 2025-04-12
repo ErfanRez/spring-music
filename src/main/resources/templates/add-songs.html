@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}">
+<body>
+<section layout:fragment="content" class="grid-span">
+    <div class="mt-4 px-5">
+        <!-- Album Details -->
+        <div class="text-center mb-4">
+            <img th:src="${session.album.coverUrl}"
+                 alt="Album Cover"
+                 class="rounded-3 shadow-sm mb-2"
+                 style="width: 150px; height: 150px; object-fit: cover;"
+                 hx-get="${session.album.coverUrl}"
+                 hx-trigger="load delay:100ms"
+                 >
+            <h2 th:text="${session.album.title}">Album Name</h2>
+        </div>
+
+        <div class="text-danger mb-5" th:if="${error}" th:text="${error}"></div>
+
+        <form method="post" enctype="multipart/form-data" onsubmit="disableSubmitButton()">
+            <div id="songInputs">
+                <div class="mb-3 song-input">
+                    <label for="songTitle1" class="form-label">Song Title</label>
+                    <input type="text" class="form-control" id="songTitle1" name="songTitles" required>
+                </div>
+                <div class="mb-3 song-input">
+                    <label for="songFile1" class="form-label">Song File</label>
+                    <input type="file" class="form-control" id="songFile1" name="songFiles" accept="audio/*" required>
+                    <div class="form-text">Only audio files (e.g., MP3, WAV) are allowed.</div>
+                </div>
+                <div class="mb-3 song-input">
+                    <label for="songTitle2" class="form-label">Song Title</label>
+                    <input type="text" class="form-control" id="songTitle2" name="songTitles" required>
+                </div>
+                <div class="mb-3 song-input">
+                    <label for="songFile2" class="form-label">Song File</label>
+                    <input type="file" class="form-control" id="songFile2" name="songFiles" accept="audio/*" required>
+                    <div class="form-text">Only audio files (e.g., MP3, WAV) are allowed.</div>
+                </div>
+            </div>
+
+            <!-- Add More Songs Button -->
+            <div class="mb-4 d-flex justify-content-between align-items-center">
+                <button type="button" id="addSongButton" class="btn btn-secondary">Add Another Song</button>
+                <!-- Submit Button -->
+                <button type="submit" id="submitButton" class="btn btn-success">Save Album</button>
+            </div>
+        </form>
+    </div>
+    <hr class="mt-5">
+    <footer th:replace="~{fragments/content-footer}"></footer>
+</section>
+
+</body>
+</html>

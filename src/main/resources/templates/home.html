@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}">
+<body>
+<section layout:fragment="content" class="grid-span">
+    <div th:if="${deleteMessage}">
+        <div th:replace="~{fragments/toast :: toast('success', ${deleteMessage})}"></div>
+    </div>
+
+    <div th:if="${error}">
+        <div th:replace="~{fragments/toast :: toast('danger', ${error})}"></div>
+    </div>
+
+    <div th:if="${auth}">
+        <div th:replace="~{fragments/toast :: toast('success', ${auth})}"></div>
+    </div>
+
+    <div th:if="${param.login}">
+        <div th:replace="~{fragments/toast :: toast('success', 'Login successful')}"></div>
+    </div>
+
+    <div th:if="${param.error}">
+        <div th:replace="~{fragments/toast :: toast('danger', 'Login failed!')}"></div>
+    </div>
+
+    <div th:if="${param.logout}">
+        <div th:replace="~{fragments/toast :: toast('success', 'Logout successful')}"></div>
+    </div>
+
+    <!-- Songs-->
+    <div class="d-flex align-items-center justify-content-between mt-3 px-5">
+        <h3 class="h3">Popular Songs</h3>
+        <a href="/songs" class="link-secondary link-offset-2 link-underline-opacity-50 link-underline-opacity-100-hover">Show more</a>
+    </div>
+
+    <!-- Scrollable Container with Arrows -->
+    <div class="pagination-container d-flex align-items-center">
+        <!-- Left Arrow -->
+        <button class="btn z-1 arrow-left bg-transparent" onclick="scrollContainerLeft('songs')">
+            <i class="fa-solid fa-chevron-left fs-2"></i>
+        </button>
+
+        <!-- Songs Cards Container -->
+        <div id="songs" class="d-flex flex-nowrap gap-3 overflow-x-auto scrollable-container py-2">
+            <div th:each="song : ${songs}">
+                <div th:replace="~{fragments/song-card :: song-card(song=${song})}"></div>
+            </div>
+        </div>
+
+
+        <!-- Right Arrow -->
+        <button class="btn z-1 arrow-right bg-transparent" onclick="scrollContainerRight('songs')">
+            <i class="fa-solid fa-chevron-right fs-2"></i>
+        </button>
+    </div>
+    <!--    end of songs-->
+
+
+    <!-- Albums-->
+    <div class="d-flex align-items-center justify-content-between mt-3 px-5">
+        <h3 class="h3">Popular Albums</h3>
+        <a href="/albums" class="link-secondary link-offset-2 link-underline-opacity-50 link-underline-opacity-100-hover">Show more</a>
+    </div>
+
+    <!-- Scrollable Container with Arrows -->
+    <div class="pagination-container d-flex align-items-center">
+        <!-- Left Arrow -->
+        <button class="btn z-1 arrow-left bg-transparent" onclick="scrollContainerLeft('albums')">
+            <i class="fa-solid fa-chevron-left fs-2"></i>
+        </button>
+
+        <!-- Album Cards Container -->
+        <div id="albums" class="d-flex flex-nowrap gap-3 overflow-x-auto scrollable-container py-2">
+            <div th:each="album : ${albums}">
+                <div th:replace="~{fragments/album-card :: album-card(album=${album})}"></div>
+            </div>
+        </div>
+
+        <!-- Right Arrow -->
+        <button class="btn z-1 arrow-right bg-transparent" onclick="scrollContainerRight('albums')">
+            <i class="fa-solid fa-chevron-right fs-2"></i>
+        </button>
+    </div>
+<!--    end of albums-->
+
+
+    <!-- Artists-->
+    <div class="d-flex align-items-center justify-content-between mt-3 px-5">
+        <h3 class="h3">Popular Artists</h3>
+        <a href="/artists" class="link-secondary link-offset-2 link-underline-opacity-50 link-underline-opacity-100-hover">Show more</a>
+    </div>
+
+    <!-- Scrollable Container with Arrows -->
+    <div class="pagination-container d-flex align-items-center">
+        <!-- Left Arrow -->
+        <button class="btn z-1 arrow-left bg-transparent" onclick="scrollContainerLeft('artists')">
+            <i class="fa-solid fa-chevron-left fs-2"></i>
+        </button>
+
+        <!-- Artists Cards Container -->
+        <div id="artists" class="d-flex flex-nowrap gap-3 overflow-x-auto scrollable-container py-2">
+            <div th:each="artist : ${artists}">
+                <div th:replace="~{fragments/artist-card :: artist-card(artist=${artist})}"></div>
+            </div>
+        </div>
+
+        <!-- Right Arrow -->
+        <button class="btn z-1 arrow-right bg-transparent" onclick="scrollContainerRight('artists')">
+            <i class="fa-solid fa-chevron-right fs-2"></i>
+        </button>
+    </div>
+    <!--    end of artists-->
+
+    <hr class="mt-5">
+    <footer th:replace="~{fragments/content-footer}"></footer>
+</section>
+</body>
+</html>

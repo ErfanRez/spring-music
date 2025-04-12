@@ -1,0 +1,29 @@
+<!-- footer.html -->
+<footer th:fragment="footer" class="footer bg-secondary-subtle text-white fixed-bottom">
+    <div class="container-fluid d-flex align-items-center justify-content-between py-2 px-4 h-100">
+        <!-- Song Info -->
+        <div class="d-flex align-items-center me-3">
+            <img id="player-cover" src="/assets/images/album-cover.webp" alt="Cover" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+            <div>
+                <div id="player-title" class="fw-semibold">Song Title</div>
+                <div id="player-artist" class="text-muted" style="font-size: 0.9rem;">Artist Name</div>
+            </div>
+        </div>
+
+        <!-- Controls & Progress -->
+        <div class="flex-grow-1 mx-4">
+            <div class="d-flex align-items-center mb-1">
+                <button id="player-play" class="btn btn-link text-white p-0" title="Play/Pause">
+                    <i class="fa-solid fa-play fa-lg"></i>
+                </button>
+                <div class="progress-container mx-5 flex-grow-1" id="progress-container" style="height: 6px; background-color: #444; border-radius: 3px; cursor: pointer; position: relative;">
+                    <div class="progress-filled" id="progress-filled" style="height: 100%; background-color: #1db954; width: 0; border-radius: 3px;"></div>
+                </div>
+                <div><span id="player-current" style="min-width: 40px;">0:00</span> / <span id="player-duration" style="min-width: 40px;">0:00</span></div>
+            </div>
+        </div>
+
+        <!-- Hidden Audio Element -->
+        <audio id="audio" preload="metadata"></audio>
+    </div>
+</footer>

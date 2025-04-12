@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Music</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.7.2/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/dist/css/bootstrap.css}"/>
+</head>
+<body class="overflow-x-hidden">
+<!-- Sidebar -->
+<div th:replace="~{fragments/sidebar :: sidebar}" class="border-end"></div>
+
+<!-- Main Content Wrapper -->
+<div class="d-flex flex-column flex-grow-1">
+    <!-- Header -->
+    <header th:replace="~{fragments/header :: header}" class="header"></header>
+
+    <!-- Main Content -->
+    <main class="main-grid">
+        <section layout:fragment="content">
+            <p>Page content goes here</p>
+        </section>
+    </main>
+</div>
+
+<!-- Footer -->
+<footer th:replace="~{fragments/footer :: footer}" class="footer bg-dark py-3">
+</footer>
+
+<!-- Login/Register Modal -->
+<div th:replace="~{fragments/auth-modal}"></div>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/dist/js/bootstrap.bundle.js}"></script>
+<script src="/assets/js/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+:root {
+    --transition: all 0.3s ease;
+    --spring-color: #6DB33F;
+    --scale-percentage: 110%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+}
+
+.text-custom {
+    color: var(--spring-color) !important;
+}
+
+.text-rose{
+    color: #f26a8d;
+}
+
+main {
+    flex: 1;
+    overflow: auto;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 101;
+}
+
+footer h5 {
+    font-weight: bold;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+.accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+    margin-left: 25px !important;
+    opacity: 80%;
+    width: 1.1rem !important;
+    height: 1.1rem !important;
+}
+
+.side-hover:hover{
+    background-color: var(--bs-dark);
+}
+
+.like-hover:hover i{
+    color: red !important;
+}
+
+.card{
+   padding: 10px;
+    transition: var(--transition);
+}
+
+.card:hover{
+    background-color: var(--bs-gray-800);
+    cursor: pointer;
+}
+
+.card-body {
+    padding: 0 1px 0 10px !important;
+}
+
+.play-card {
+    position: relative;
+}
+
+.play-icon {
+    position: absolute;
+    display: flex;
+    bottom: 15px; /* Start from bottom */
+    right: 8px;
+    width: 45px;
+    height: 45px;
+    background-color: #6DB33F;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0; /* Initially hidden */
+    transform: translateY(15px); /* Positioned below */
+    transition: var(--transition);
+}
+
+.like-icon {
+    position: absolute;
+    display: flex;
+    top: 8px;
+    right: 18px;
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0; /* Initially hidden */
+    transition: var(--transition);
+}
+
+.delete-icon {
+    position: absolute;
+    display: flex;
+    top: 8px;
+    left: 18px;
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0; /* Initially hidden */
+    transition: var(--transition);
+}
+
+.like-icon:hover{
+    scale: var(--scale-percentage);
+}
+
+.delete-icon:hover{
+    scale: var(--scale-percentage);
+}
+
+.play-icon:hover {
+    scale: var(--scale-percentage);
+}
+
+.play-card:hover .like-icon,
+.play-card:hover .delete-icon {
+    opacity: 1;
+}
+
+.play-card:hover .play-icon {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.play-icon i {
+    color: #1A1D20;
+}
+
+.main-grid{
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.grid-span{
+    grid-column: 1 / -1 !important;
+}
+
+.general-hover{
+    opacity: 1;
+    transition: var(--transition);
+}
+.general-hover:hover{
+    opacity: 0.7;
+}
+
+/* Scrollable Container */
+.scrollable-container {
+    scroll-behavior: smooth; /* Enable smooth scrolling */
+    -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+.scrollable-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in Chrome/Safari */
+}
+
+/* Arrows */
+.arrow-left,
+.arrow-right {
+    opacity: 0; /* Initially hidden */
+    transition: var(--transition);
+}
+
+.pagination-container:hover .arrow-left,
+.pagination-container:hover .arrow-right {
+    opacity: 1; /* Show arrows on hover */
+}
+
+/* Disabled Arrows */
+.arrow-left.disabled,
+.arrow-right.disabled {
+    visibility: hidden; /* Hide the arrow completely */
+    pointer-events: none; /* Disable click events */
+}
+
+.table-hover tbody tr {
+    transition: var(--transition);
+}
+
+.heart-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.song-row .play-button,
+.song-row .heart-btn,
+.song-row .delete-btn
+{
+    display: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.song-row:hover .row-number {
+    display: none;
+}
+
+
+.song-row:hover .play-button,
+.song-row:hover .heart-btn,
+.song-row:hover .delete-btn
+{
+    display: inline;
+}
+
+.heart-btn:hover {
+    color: red;
+}
+
+.art-profile{
+    transition: var(--transition);
+}
+.art-profile:hover{
+    scale: var(--scale-percentage);
+}
+
+

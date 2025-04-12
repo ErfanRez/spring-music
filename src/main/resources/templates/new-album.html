@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}">
+<body>
+<section layout:fragment="content" class="grid-span">
+    <div class="mt-3 px-5">
+        <!-- Toast Container (single toast) -->
+<!--        <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">-->
+<!--            <div id="errorToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" th:attr="data-has-errors=${#fields.hasErrors('album.*')}">-->
+<!--                <div class="d-flex">-->
+<!--                    <div class="toast-body">-->
+<!--                        <span th:if="${#fields.hasErrors('album.*')}" th:each="error : ${#fields.errors('album.*')}" th:text="${error}"></span>-->
+<!--                    </div>-->
+<!--                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <!-- Toast Container (Multiple toasts) -->
+        <!--        <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">-->
+        <!--            &lt;!&ndash; Dynamic Toasts for Validation Errors &ndash;&gt;-->
+        <!--            <div th:each="error : ${#fields.errors('album.*')}" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">-->
+        <!--                <div class="d-flex">-->
+        <!--                    <div class="toast-body" th:text="${error}"></div>-->
+        <!--                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <h1 class="mb-5 text-center">Add New Album</h1>
+
+        <div class="text-danger mb-5" th:if="${error}" th:text="${error}"></div>
+
+        <form th:object="${album}" method="post" enctype="multipart/form-data">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Album Name</label>
+                    <input type="text" class="form-control" id="name" th:field="*{title}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                </div>
+                <div class="col-md-6">
+                    <label for="releaseDate" class="form-label">Release Date</label>
+                    <input type="date" class="form-control" id="releaseDate" th:field="*{releaseDate}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}"></div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="price" class="form-label">Album Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" step="0.01" class="form-control" id="price" th:field="*{price}">
+                    </div>
+                    <div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+                </div>
+                <div class="col-md-6">
+                    <label for="genre" class="form-label">Genre</label>
+                    <select class="form-select" id="genre" th:field="*{genre}">
+                        <option value="" selected>Select a genre</option>
+                        <option th:each="genre : ${T(com.music.utils.Genres).values()}"
+                                th:value="${genre}"
+                                th:text="${genre.displayName}"> <!-- Use displayName -->
+                        </option>
+                    </select>
+                    <div class="text-danger" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="cover" class="form-label">Album Cover</label>
+                    <input type="file" class="form-control" id="cover" name="cover" accept="image/*">
+                    <div class="text-danger" th:if="${coverError}" th:text="${coverError}"></div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-success">Next</button>
+            </div>
+        </form>
+    </div>
+    <hr class="mt-5">
+    <footer th:replace="~{fragments/content-footer}"></footer>
+</section>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!-- sidebar.html -->
+<div th:fragment="sidebar"
+     class="d-flex flex-column flex-shrink-0 p-3 border-end border-secondary border-opacity-50 bg-dark-subtle"
+     style="width: 270px; height: calc(100vh - 80px);" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <a class="h2 mb-2 text-decoration-none" href="/"><span style="color: #6DB33F">Spring</span> Music</a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto gap-2">
+        <li class="nav-item">
+            <a href="/" class="nav-link text-body fs-5 side-hover" aria-current="page">
+                <i class="fa-solid fa-house me-2"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li>
+            <a href="/artists" class="nav-link text-body fs-5 side-hover">
+                <i class="fa-solid fa-microphone-lines me-2 fs-4"></i>
+                <span>Artists</span>
+            </a>
+        </li>
+        <li>
+            <a href="/albums" class="nav-link text-body fs-5 side-hover">
+                <i class="fa-solid fa-record-vinyl me-2"></i>
+                <span>Albums</span>
+            </a>
+        </li>
+        <li>
+            <a href="/songs" class="nav-link text-body fs-5 side-hover">
+                <i class="fa-solid fa-music me-2"></i>
+                <span>Songs</span>
+            </a>
+        </li>
+        <li sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_ARTIST')">
+            <a href="/dashboard" class="nav-link text-body fs-5 side-hover">
+                <i class="fa-solid fa-table-columns me-2"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <!-- Accordion -->
+        <li sec:authorize="isAuthenticated()">
+            <div class="accordion" id="sidebarAccordion" >
+                <div class="accordion-item bg-transparent border-0">
+                    <h2 class="accordion-header" id="headingMusic">
+                        <button class="accordion-button bg-dark-subtle text-body fs-5 collapsed shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMusic" aria-expanded="false" aria-controls="collapseMusic">
+                            <span>My Music</span>
+                        </button>
+                    </h2>
+                    <div id="collapseMusic" class="accordion-collapse collapse" aria-labelledby="headingMusic" data-bs-parent="#sidebarAccordion">
+                        <div class="accordion-body p-0">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a href="/fav/songs" class="nav-link text-body fs-6 side-hover like-hover">
+                                        <i class="fa-solid fa-heart me-2"></i>
+                                        Favorite Songs
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/fav/albums" class="nav-link text-body fs-6 side-hover">
+                                        <i class="fa-solid fa-folder-open me-2"></i>
+                                        Album Library
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
