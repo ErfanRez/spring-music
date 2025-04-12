@@ -56,7 +56,6 @@ logs/
 .env.*.local
 
 # Spring Boot application properties (if sensitive)
-application*.properties
 application*.yml
 !application-example.properties
 !application-example.yml
